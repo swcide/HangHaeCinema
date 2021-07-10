@@ -22,11 +22,11 @@ public class Review extends Timestamped {
 
     @ManyToOne
     @JoinColumn(name = "MOVIE_CODE", referencedColumnName = "MOVIE_CODE")
-    private Movie moviecode;
+    private Movie movie;
 
     @ManyToOne
     @JoinColumn(name = "USER_CODE", referencedColumnName = "USER_CODE")
-    private User email;
+    private User user;
 
     @Column(nullable = false)
     private String contents;
