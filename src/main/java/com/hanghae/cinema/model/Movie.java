@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Setter
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,13 +24,21 @@ public class Movie extends Timestamped{
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable=false)
+    private String star;
+
+    @Column(nullable = false)
+    private String img;
+
     public Movie(MovieDto movieDto) {
         this.title = movieDto.getTitle();
-
+        this.star = movieDto.getStar();
+        this.img = movieDto.getImg();
+//        this.moviecode = movieDto.getMovie_code();
     }
 //
-//    @Column(nullable = false)
-//    private String genre;
+    @Column(nullable = false)
+    private String genre;
 //
 //    @Column(nullable = false)
 //    private String actor;
@@ -48,8 +55,7 @@ public class Movie extends Timestamped{
 //    @Column(nullable = false)
 //    private String year;
 //
-//    @Column(nullable = false)
-//    private String img;
+
 //
 //    @Column(nullable = false)
 //    private String plot;

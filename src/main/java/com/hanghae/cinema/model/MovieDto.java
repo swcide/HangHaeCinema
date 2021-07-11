@@ -1,22 +1,27 @@
 package com.hanghae.cinema.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.json.JSONObject;
+import lombok.*;
 
-import javax.persistence.Column;
 
+@ToString
 @NoArgsConstructor // 기본 생성자를 자동으로 만듭니다.
 @Getter
+@AllArgsConstructor
 public class MovieDto {
 
-    @Column(nullable = false)
+
     private String title;
+    private String star;
+    private String img;
+//    private String movie_code;
+
+    public MovieDto(CrawlingDto crawlingDto) {
+        this.title = crawlingDto.getTitle();
+//        this.star = crawlingDto.getStar();
+//        this.img = crawlingDto.getImg();
+//        this.movie_code = crawlingDto.getMovie_code();
+    }
 
 
-//    public MovieDto(JSONObject itemJson) {
-//        this.title = itemJson.getString("title");
-//
-//    }
 
 }

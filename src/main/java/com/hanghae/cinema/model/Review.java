@@ -1,5 +1,6 @@
 package com.hanghae.cinema.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,10 +8,10 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
-@Setter
 @Getter
 @NoArgsConstructor
-//@Entity
+@AllArgsConstructor
+@Entity
 public class Review extends Timestamped {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +29,11 @@ public class Review extends Timestamped {
     @JoinColumn(name = "USER_CODE", referencedColumnName = "USER_CODE")
     private User user;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String contents;
 
     @ColumnDefault("0")
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int likecount;
 
     // 김진태 님 탓 ㅇㅈ?

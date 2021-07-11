@@ -6,10 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Setter
 @Getter
 @NoArgsConstructor
-//@Entity
+@Entity
 public class Like extends Timestamped{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +16,7 @@ public class Like extends Timestamped{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "review_id")
+    @JoinColumn(nullable = false, name = "review_id")
     private Review review;
 
     @ManyToOne
