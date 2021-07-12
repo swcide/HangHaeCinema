@@ -1,4 +1,4 @@
-package com.hanghae.cinema.model;
+package com.hanghae.cinema.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Getter
 public class CrawlingDto {
 
-
     private String title;
     private String star;
     private String movie_Code;
     private String img;
+
 
 
     public CrawlingDto(String title, String star, String[] code, String img) {
@@ -24,4 +24,5 @@ public class CrawlingDto {
         this.img=img+code[1];
 
     }
+
 }

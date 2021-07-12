@@ -1,28 +1,33 @@
 package com.hanghae.cinema.util;
 
 
-import com.hanghae.cinema.model.CrawlingDto;
+import com.hanghae.cinema.dto.CrawlingDto;
 
-import com.hanghae.cinema.model.MovieDto;
+import com.hanghae.cinema.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
-
 public class MovieCrawling {
+    private final MovieService movieService;
 
+
+    @PostConstruct
     public List<CrawlingDto> movieListcrawling() throws Exception{
         String url = "https://movie.naver.com/movie/running/current.nhn";
         Document doc = Jsoup.connect(url).get();
         Elements element = doc.select("dl.lst_dsc");
-        List<MovieDto> movieDtoList =  new ArrayList<>();
-        return toList(element);
+
+        return movieService.saveMovies(toList(element));
     }
 
     public List<CrawlingDto> toList(Elements element) {

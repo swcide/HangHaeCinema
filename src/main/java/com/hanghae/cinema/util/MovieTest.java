@@ -1,7 +1,7 @@
 package com.hanghae.cinema.util;
 
 
-import com.hanghae.cinema.model.MovieDto;
+import com.hanghae.cinema.dto.MovieDto;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Slf4j
-@Component
+//@Slf4j
+//@Component
 //@RequiredArgsConstructor
 public class MovieTest {
 
@@ -28,10 +28,7 @@ public class MovieTest {
         Elements element = doc.select("dl.lst_dsc");
         return toList(element);
     }
-
     public List<MovieDto> toList(Elements element) {
-
-
         List<MovieDto> movieList = new ArrayList<>();
         String response_code ="";
         String[] code_split ;
@@ -47,20 +44,14 @@ public class MovieTest {
             title = el.select(".tit> a").text();
             img = "https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=" + code;
             star =el.select(".star_t1>.num").text();
-
             MovieDto movieDto = new MovieDto();
 //            movieDto.setMovie_code(code);
 //            movieDto.setTitle(title);
 //            movieDto.setImg(img);
 //            movieDto.setStar(star);
-
             movieList.add(movieDto);
-
         }
-
 //
-
-
         return movieList;
     }
 

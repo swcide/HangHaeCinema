@@ -15,13 +15,10 @@ public class Like extends Timestamped{
     @Id
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "review_id")
-    private Review review;
+//    @ManyToOne
+//    @JoinColumn(nullable = false, name = "review_id")
+//    private Review review;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_CODE", referencedColumnName = "USER_CODE")
-    private User user;
 
 //    @ColumnDefault("false")
 //    @Column()

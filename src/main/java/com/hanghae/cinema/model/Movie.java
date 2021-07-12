@@ -18,27 +18,38 @@ public class Movie extends Timestamped{
     @Id
     private Long id;
 
-    @Column(name = "MOVIE_CODE", nullable = false, unique = true)
-    private String moviecode;
-
     @Column(nullable = false)
     private String title;
 
     @Column(nullable=false)
     private String star;
 
+    @Column(name = "MOVIE_CODE", nullable = false, unique = true)
+    private String moviecode;
+
+
+
+
+
     @Column(nullable = false)
     private String img;
 
-    public Movie(MovieDto movieDto) {
-        this.title = movieDto.getTitle();
-        this.star = movieDto.getStar();
-        this.img = movieDto.getImg();
-//        this.moviecode = movieDto.getMovie_code();
+    public Movie( String title, String star, String movie_code, String img) {
+        this.title=title;
+        this.star=star;
+        this.moviecode = movie_code;
+        this.img =img;
     }
+
+//    public Movie(MovieDto movieDto) {
+//        this.title = movieDto.getTitle();
+//        this.star = movieDto.getStar();
+//        this.img = movieDto.getImg();
+//        this.moviecode = movieDto.getMovie_code();
+//    }
 //
-    @Column(nullable = false)
-    private String genre;
+//    @Column(nullable = false)
+//    private String genre;
 //
 //    @Column(nullable = false)
 //    private String actor;
