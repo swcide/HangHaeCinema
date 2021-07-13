@@ -16,30 +16,40 @@ public class ReviewController {
     final ReviewRepository reviewRepository;
     final ReviewService reviewService;
 
+    // 리뷰 등록
     @PostMapping("/api/review")
-    public Review reviewWrite(@RequestBody ReviewDto reviewDto) {
-
-        System.out.println("zzzz 들어옴?");
+    public Review writeReview(@RequestBody ReviewDto reviewDto) {
+        System.out.println(reviewDto.getMoviecode());
         Review review = new Review(reviewDto);
         reviewRepository.save(review);
-
         return review;
     }
-
+    //리뷰 목록 페이징
     @GetMapping("/api/review/{moviecode}")
-    public Page<Review> getReview(@PathVariable String moviecode,
-                                   @RequestParam("page") int page,
-                                   @RequestParam("size") int size){
-
-        page = 1;
-        size = 10;
+    public Page<Review> getReview(@PathVariable String moviecode
+                                   ){
 
 
+        int page = 1;
+        int size = 10;
         page= page-1;
+        System.out.println(page+"??????????");
         return reviewService.getReview(moviecode,page,size);
 
     }
+    //리뷰 업데이트
+    @PutMapping("/api/review/update/{id}")
+    public Long updateReview(@PathVariable Long id, @RequestBody ReviewDto reviewDto) {
 
+        return reviewService.updateReview(reviewDto, id);
+    }
+
+    // 리뷰 삭제
+    @DeleteMapping("/api/review/delete/{id}")
+    public Long deleteReview(@PathVariable Long id) {
+
+        return reviewService.deleteReview(id);
+    }
 
 
 }
