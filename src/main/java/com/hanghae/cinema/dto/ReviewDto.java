@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ReviewDto {
 
-    private Long id;
-
     private String moviecode;
 
     private String contents;

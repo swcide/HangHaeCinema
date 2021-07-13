@@ -21,6 +21,7 @@ public class MovieController {
     private final MovieRepository movieRepository;
     private final MovieService movieService;
 
+    // 영화 목록 페이징
     @GetMapping("/api/movie")
     public Page<Movie> getMoives()  {
         int page = 1;
@@ -28,5 +29,7 @@ public class MovieController {
         page= page-1;
         return movieService.getMovie(page,size);
     }
+
+
 
 }
