@@ -24,19 +24,15 @@ public class MovieCrawling {
 
 
     // 서버 실행과 동시에 크롤링 하겠다.
-//    @PostConstruct
+    @PostConstruct
     public List<CrawlingDto> movieListcrawling() throws Exception{
         String url = "https://movie.naver.com/movie/running/current.nhn";
         Document doc = Jsoup.connect(url).get();
         Elements element = doc.select("dl.lst_dsc");
-        String img ="https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=204496";
-        return movieService.saveMovies(getimgList(toList(element,img)));
+        return movieService.saveMovies(getimgList(toList(element)));
     }
-
     public  List<CrawlingDto>  getimgList(List<CrawlingDto> crawlingDto)throws Exception {
-
         List<String> imgList = new ArrayList<>();
-        List<CrawlingDto> result = crawlingDto;
 
         for(CrawlingDto  craw: crawlingDto) {
             String code = craw.getMovie_Code();
@@ -46,24 +42,21 @@ public class MovieCrawling {
             String img =element.attr("src");
             imgList.add(img);
         }
-        for (int i = 0; i <result.size() ; i++) {
-            result.get(i).setImg(imgList.get(i));
-            System.out.println(result.get(i));
+        for (int i = 0; i < crawlingDto.size() ; i++) {
+            crawlingDto.get(i).setImg(imgList.get(i));
+            System.out.println(crawlingDto.get(i));
         }
-
-        return result;
+        return crawlingDto;
     }
 
-
-
-    public List<CrawlingDto> toList(Elements element,String img) {
+    public List<CrawlingDto> toList(Elements element) {
         return element
                 .stream()
                 .map(el->new CrawlingDto(
                         el.select(".tit>a").text(),
                         el.select("dd.star > dl.info_star > dd > div > a > span.num").text(),
                         el.select(".tit>a").attr("href").split("code="),
-                        img
+                        null
                 )).collect(Collectors.toList());
 
     }

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -29,10 +30,14 @@ public class MovieController {
 
     // 영화 목록 페이징
     @GetMapping("/api/movie")
-    public Page<Movie> getMoives()  {
-        int page = 1;
-        int size = 10;
-        page= page-1;
+    public Page<Movie> getMoives(@RequestParam("start") int page,
+                                 @RequestParam("size") int size){
+
+        System.out.println("???");
+        System.out.println(page);
+        System.out.println(size);
+        System.out.println("???");
+//        page= page-1;
         return movieService.getMovie(page,size);
     }
 

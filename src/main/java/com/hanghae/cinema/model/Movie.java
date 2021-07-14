@@ -3,9 +3,7 @@ package com.hanghae.cinema.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-
 
 @Getter
 @NoArgsConstructor
@@ -25,10 +23,6 @@ public class Movie extends Timestamped{
 
     @Column(name = "MOVIE_CODE", nullable = false, unique = true)
     private String moviecode;
-
-
-
-
 
     @Column(nullable = false)
     private String img;
