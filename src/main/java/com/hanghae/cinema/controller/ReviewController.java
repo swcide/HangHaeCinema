@@ -15,11 +15,9 @@ public class ReviewController {
 
     final ReviewRepository reviewRepository;
     final ReviewService reviewService;
-
     // 리뷰 등록
     @PostMapping("/api/review")
     public Review writeReview(@RequestBody ReviewDto reviewDto) {
-        System.out.println(reviewDto.getMoviecode());
         Review review = new Review(reviewDto);
         reviewRepository.save(review);
         return review;
@@ -28,14 +26,11 @@ public class ReviewController {
     @GetMapping("/api/review/{moviecode}")
     public Page<Review> getReview(@PathVariable String moviecode
                                    ){
-
-
         int page = 1;
         int size = 10;
         page= page-1;
         System.out.println(page+"??????????");
         return reviewService.getReview(moviecode,page,size);
-
     }
     //리뷰 업데이트
     @PutMapping("/api/review/update/{id}")
@@ -43,13 +38,10 @@ public class ReviewController {
 
         return reviewService.updateReview(reviewDto, id);
     }
-
     // 리뷰 삭제
     @DeleteMapping("/api/review/delete/{id}")
     public Long deleteReview(@PathVariable Long id) {
 
         return reviewService.deleteReview(id);
     }
-
-
 }

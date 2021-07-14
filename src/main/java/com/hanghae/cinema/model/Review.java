@@ -28,10 +28,11 @@ public class Review extends Timestamped {
     @Column(nullable = true)
     private String contents;
 
+    private String password;
+
     @ColumnDefault("0")
     @Column(nullable = true)
     private int likecount;
-
 
     @OneToMany(mappedBy = "review")
     private List<LikeReview> likeReviews;
@@ -39,8 +40,6 @@ public class Review extends Timestamped {
 
 
     public Review(ReviewDto reviewDto) {
-
-
 
         if (reviewDto.getContents() == "") {
             throw new IllegalArgumentException("내용이 비어있어요!");
