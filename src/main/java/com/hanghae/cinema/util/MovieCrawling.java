@@ -29,13 +29,14 @@ public class MovieCrawling {
         String url = "https://movie.naver.com/movie/running/current.nhn";
         Document doc = Jsoup.connect(url).get();
         Elements element = doc.select("dl.lst_dsc");
-        String img ="https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode=204496";
-        return movieService.saveMovies(getimgList(toList(element,img)));
+
+        return movieService.saveMovies(getimgList(toList(element)));
     }
 
     public  List<CrawlingDto>  getimgList(List<CrawlingDto> crawlingDto)throws Exception {
 
         List<String> imgList = new ArrayList<>();
+        List<String> plotList = new ArrayList<>();
         List<CrawlingDto> result = crawlingDto;
 
         for(CrawlingDto  craw: crawlingDto) {
@@ -46,24 +47,37 @@ public class MovieCrawling {
             String img =element.attr("src");
             imgList.add(img);
         }
+
+        for(CrawlingDto  craw2: crawlingDto) {
+            String code = craw2.getMovie_Code();
+            String url = "https://movie.naver.com/movie/bi/mi/basic.nhn?code=" + code;
+            Document doc = Jsoup.connect(url).get();
+            Elements element = doc.select("div.section_group_frst");
+            String plot =element.select("div:nth-child(1) > div > div.story_area > p").text();
+
+//            System.out.println("plot = "+plot);
+            plotList.add(plot);
+
+        }
+
         for (int i = 0; i <result.size() ; i++) {
             result.get(i).setImg(imgList.get(i));
-            System.out.println(result.get(i));
+            result.get(i).setPlot(plotList.get(i));
+//            System.out.println(result.get(i));
         }
 
         return result;
     }
 
-
-
-    public List<CrawlingDto> toList(Elements element,String img) {
+    public List<CrawlingDto> toList(Elements element) {
         return element
                 .stream()
                 .map(el->new CrawlingDto(
                         el.select(".tit>a").text(),
                         el.select("dd.star > dl.info_star > dd > div > a > span.num").text(),
                         el.select(".tit>a").attr("href").split("code="),
-                        img
+                        null,
+                        null
                 )).collect(Collectors.toList());
 
     }

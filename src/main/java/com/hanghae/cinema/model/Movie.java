@@ -26,18 +26,18 @@ public class Movie extends Timestamped{
     @Column(name = "MOVIE_CODE", nullable = false, unique = true)
     private String moviecode;
 
-
-
-
-
     @Column(nullable = false)
     private String img;
 
-    public Movie( String title, String star, String movie_code, String img) {
+    @Column(length = 1000)
+    private String plot;
+
+    public Movie( String title, String star, String movie_code, String img, String plot) {
         this.title=title;
         this.star=star;
         this.moviecode = movie_code;
         this.img =img;
+        this.plot = plot;
     }
 
 

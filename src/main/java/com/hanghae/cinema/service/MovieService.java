@@ -21,14 +21,14 @@ public class MovieService {
     // 크롤링 저장.
     public List<CrawlingDto> saveMovies(List<CrawlingDto> crawlingList) {
 
-        System.out.println("???여기에요?");
         List<Movie> movies = crawlingList.
                 stream().
                 map(crawling -> new Movie(
                     crawling.getTitle(),
                     crawling.getStar(),
                     crawling.getMovie_Code(),
-                    crawling.getImg()
+                    crawling.getImg(),
+                    crawling.getPlot()
                 )).collect(Collectors.toList());
         movieRepository.saveAll(movies);
         return crawlingList;

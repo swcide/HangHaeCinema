@@ -14,14 +14,16 @@ public class CrawlingDto {
     private String star;
     private String movie_Code;
     private String img;
+    private String plot;
 
 
 
-    public CrawlingDto(String title, String star, String[] code, String img) {
+    public CrawlingDto(String title, String star, String[] code, String img, String plot) {
         this.title = title;
         this.star = star;
         this.movie_Code = code[1];
         this.img=img;
+        this.plot = plot;
 
     }
 
