@@ -1,6 +1,5 @@
 package com.hanghae.cinema.service;
 
-import com.hanghae.cinema.dto.LikeDto;
 import com.hanghae.cinema.dto.LikeResponseDto;
 import com.hanghae.cinema.model.LikeReview;
 import com.hanghae.cinema.model.Review;

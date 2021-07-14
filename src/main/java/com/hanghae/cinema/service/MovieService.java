@@ -2,6 +2,7 @@ package com.hanghae.cinema.service;
 
 import com.hanghae.cinema.dto.CrawlingDto;
 
+import com.hanghae.cinema.dto.MovieDto;
 import com.hanghae.cinema.model.Movie;
 import com.hanghae.cinema.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,8 @@ public class MovieService {
     final MovieRepository movieRepository;
     // 크롤링 저장.
     public List<CrawlingDto> saveMovies(List<CrawlingDto> crawlingList) {
+
+        System.out.println("???여기에요?");
         List<Movie> movies = crawlingList.
                 stream().
                 map(crawling -> new Movie(
@@ -34,5 +37,11 @@ public class MovieService {
     public Page<Movie> getMovie(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return movieRepository.findAll(pageable);
+    }
+
+    public Movie getMovieDetail(Long id) {
+        Movie b = movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("에러입니다 ㅎㅎ"));
+
+        return b;
     }
 }

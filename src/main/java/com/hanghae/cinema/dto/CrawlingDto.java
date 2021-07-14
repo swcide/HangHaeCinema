@@ -1,10 +1,10 @@
 package com.hanghae.cinema.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,8 +21,11 @@ public class CrawlingDto {
         this.title = title;
         this.star = star;
         this.movie_Code = code[1];
-        this.img=img+code[1];
+        this.img=img;
 
     }
 
+    public CrawlingDto(String img) {
+        this.img =img;
+    }
 }
