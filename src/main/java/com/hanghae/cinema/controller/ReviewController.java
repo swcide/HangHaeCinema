@@ -1,12 +1,13 @@
 package com.hanghae.cinema.controller;
 
-import com.hanghae.cinema.dto.ReviewDto;
+import com.hanghae.cinema.dto.request.ReviewRequestDto;
 import com.hanghae.cinema.model.Review;
 import com.hanghae.cinema.repository.ReviewRepository;
 import com.hanghae.cinema.service.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -17,24 +18,20 @@ public class ReviewController {
     final ReviewService reviewService;
     // 리뷰 등록
     @PostMapping("/api/review")
-    public Review writeReview(@RequestBody ReviewDto reviewDto) {
+    public Review writeReview(@RequestBody ReviewRequestDto reviewDto) {
         Review review = new Review(reviewDto);
         reviewRepository.save(review);
         return review;
     }
     //리뷰 목록 페이징
-    @GetMapping("/api/review/{moviecode}")
-    public Page<Review> getReview(@PathVariable String moviecode
-                                   ){
-        int page = 1;
-        int size = 10;
-        page= page-1;
-        System.out.println(page+"??????????");
-        return reviewService.getReview(moviecode,page,size);
+    @GetMapping("/api/review/{id}")
+    public List<Review> getReview(@PathVariable Long id ){
+
+        return reviewService.getReview(id);
     }
     //리뷰 업데이트
     @PutMapping("/api/review/update/{id}")
-    public Long updateReview(@PathVariable Long id, @RequestBody ReviewDto reviewDto) {
+    public Long updateReview(@PathVariable Long id, @RequestBody ReviewRequestDto reviewDto) {
 
         return reviewService.updateReview(reviewDto, id);
     }

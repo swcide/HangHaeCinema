@@ -1,14 +1,12 @@
 package com.hanghae.cinema.model;
 
-import com.hanghae.cinema.dto.LikeDto;
-import com.hanghae.cinema.dto.ReviewDto;
+import com.hanghae.cinema.dto.request.ReviewRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -25,6 +23,9 @@ public class Review extends Timestamped {
     @Column(nullable = false)
     private String moviecode;
 
+    @Column(nullable = false)
+    private String username;
+
     @Column(nullable = true)
     private String contents;
 
@@ -34,24 +35,24 @@ public class Review extends Timestamped {
     @Column(nullable = true)
     private int likecount;
 
-    @OneToMany(mappedBy = "review")
-    private List<LikeReview> likeReviews;
 
 
 
-    public Review(ReviewDto reviewDto) {
+
+    public Review(ReviewRequestDto reviewDto) {
 
         if (reviewDto.getContents() == "") {
             throw new IllegalArgumentException("내용이 비어있어요!");
         }
-
+        this.username = reviewDto.getUsername();
         this.moviecode= reviewDto.getMoviecode();
         this.contents = reviewDto.getContents();
         this.likecount =reviewDto.getLikecount();
 
     }
 
-    public void updateReview(ReviewDto reviewDto) {
+    public void updateReview(ReviewRequestDto reviewDto) {
+        this.username = reviewDto.getUsername();
         this.contents = reviewDto.getContents();
     }
 

@@ -1,16 +1,14 @@
 package com.hanghae.cinema.repository;
 
 
-import com.hanghae.cinema.model.LikeReview;
+
 import com.hanghae.cinema.model.Review;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 
 public interface ReviewRepository extends JpaRepository<Review,Long> {
-    Page<Review> findReviewByMoviecodeOrderByCreatedAtDesc(String moviecode, Pageable pageable);
-
+    List<Review> findReviewByIdOrderByCreatedAtDesc(Long id);
     Review findReviewById(Long review_id);
 }
 
