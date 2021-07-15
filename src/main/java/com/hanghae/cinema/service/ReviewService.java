@@ -6,7 +6,6 @@ import com.hanghae.cinema.model.Review;
 import com.hanghae.cinema.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -19,25 +18,33 @@ public class ReviewService {
     // 리뷰 목록 페이징
     public List<Review> getReview(Long id) {
 
-        if(reviewRepository.findReviewByIdOrderByCreatedAtDesc(id).size() == 0){
+        if(reviewRepository.findByMoviveid(id).size() == 0){
             throw new ApiRequestException("등록된 리뷰가 없습니다.");
         }
-
-        return reviewRepository.findReviewByIdOrderByCreatedAtDesc(id);
+        return reviewRepository.findByMoviveid(id);
     }
 
     //업데이트
     @Transactional
     public Long updateReview(ReviewRequestDto reviewDto, Long id) {
         Review review = reviewRepository.findById(id).orElseThrow(
-                () -> new ApiRequestException("해당 아이디가 존재하지 않습니다.")
-        );
+                () -> new ApiRequestException("해당 아이디가 존재하지 않습니다."));
+
+        if (!review.getPassword().equals(reviewDto.getPassword())){
+            throw new ApiRequestException("비밀번호가 다릅니다 선생님..");
+        }
+
         review.updateReview(reviewDto);
         return review.getId();
     }
-
     // 삭제
-    public Long deleteReview( Long id) {
+    public Long deleteReview( Long id, String password) {
+        Review review = reviewRepository.findById(id).orElseThrow(
+                () -> new ApiRequestException("해당 아이디가 존재하지 않습니다."));
+        if(!password.equals(review.getPassword())){
+            throw new ApiRequestException("비밀번호가 다릅니다 선생님..");
+        }
+
         reviewRepository.deleteById(id);
         return id;
     }

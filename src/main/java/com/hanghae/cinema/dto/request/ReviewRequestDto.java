@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ReviewRequestDto {
 
+    private Long moviveid;
     private String username;
-
-    private String moviecode;
-
     private String contents;
-
-    private int likecount;
+    private String password;
 }

@@ -16,7 +16,6 @@ public class ReviewController {
 
     final ReviewRepository reviewRepository;
     final ReviewService reviewService;
-    // 리뷰 등록
     @PostMapping("/api/review")
     public Review writeReview(@RequestBody ReviewRequestDto reviewDto) {
         Review review = new Review(reviewDto);
@@ -37,8 +36,9 @@ public class ReviewController {
     }
     // 리뷰 삭제
     @DeleteMapping("/api/review/delete/{id}")
-    public Long deleteReview(@PathVariable Long id) {
+    public Long deleteReview(@PathVariable Long id, @RequestParam("password")String password) {
 
-        return reviewService.deleteReview(id);
+        return reviewService.deleteReview(id,password);
+    // 리뷰 등록
     }
 }

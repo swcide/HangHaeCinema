@@ -22,7 +22,6 @@ public class CrawlingDto {
     private String runtime;
     private String actor;
 
-
     public CrawlingDto(String title, String star, String[] code, String img, String plot, String genre, String year, String runtime, String actor) {
         this.title = title;
         this.star = star;
@@ -36,6 +35,5 @@ public class CrawlingDto {
 
 
     }
-
-
+    
 }

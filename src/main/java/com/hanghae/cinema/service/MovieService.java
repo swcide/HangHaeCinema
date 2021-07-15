@@ -38,13 +38,17 @@ public class MovieService {
         return crawlingList;
     }
     // 영화 목록 페이징.
+
     public Page<Movie> getMovie(int page,int size) {
         Pageable pageable = PageRequest.of(page ,size);
         return movieRepository.findAll(pageable);
     }
 
     public Movie getMovieDetail(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ApiRequestException("에러입니다 ㅎㅎ"));
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("영화정보가 존재하지 않습니다."));
+
+
 
         return movie;
     }

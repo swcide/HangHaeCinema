@@ -18,5 +18,4 @@ public class MovieRequestDto {
     private String year;
     private String img;
     private String plot;
-
 }

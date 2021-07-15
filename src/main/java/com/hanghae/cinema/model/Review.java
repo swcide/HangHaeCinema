@@ -18,22 +18,19 @@ public class Review extends Timestamped {
     @Id
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "MOVIE_CODE", referencedColumnName = "MOVIE_CODE")
-    @Column(nullable = false)
-    private String moviecode;
+    @Column(nullable =false)
+    private Long moviveid;
+
 
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String contents;
 
+    @Column(nullable = false)
     private String password;
 
-    @ColumnDefault("0")
-    @Column(nullable = true)
-    private int likecount;
 
 
 
@@ -42,12 +39,14 @@ public class Review extends Timestamped {
     public Review(ReviewRequestDto reviewDto) {
 
         if (reviewDto.getContents() == "") {
-            throw new IllegalArgumentException("내용이 비어있어요!");
+            throw new ArithmeticException("내용이 비어있어요!");
         }
+
         this.username = reviewDto.getUsername();
-        this.moviecode= reviewDto.getMoviecode();
+        this.moviveid = reviewDto.getMoviveid();
         this.contents = reviewDto.getContents();
-        this.likecount =reviewDto.getLikecount();
+        this.password = reviewDto.getPassword();
+
 
     }
 
