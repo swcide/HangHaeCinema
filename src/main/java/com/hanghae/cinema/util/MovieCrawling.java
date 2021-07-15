@@ -65,7 +65,8 @@ public class MovieCrawling {
             result.get(i).setPlot(plotList.get(i));
 //            System.out.println(result.get(i));
         }
-
+        System.out.println("-------result--------");
+        System.out.println(result);
         return result;
     }
 
