@@ -1,6 +1,7 @@
 package com.hanghae.cinema.service;
 
 import com.hanghae.cinema.dto.request.ReviewRequestDto;
+import com.hanghae.cinema.exception.ApiRequestException;
 import com.hanghae.cinema.model.Review;
 import com.hanghae.cinema.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,11 @@ public class ReviewService {
 
     // 리뷰 목록 페이징
     public List<Review> getReview(Long id) {
+
+        if(reviewRepository.findReviewByIdOrderByCreatedAtDesc(id).size() == 0){
+            throw new ApiRequestException("등록된 리뷰가 없습니다.");
+        }
+
         return reviewRepository.findReviewByIdOrderByCreatedAtDesc(id);
     }
 
@@ -24,7 +30,7 @@ public class ReviewService {
     @Transactional
     public Long updateReview(ReviewRequestDto reviewDto, Long id) {
         Review review = reviewRepository.findById(id).orElseThrow(
-                () -> new NullPointerException("해당 아이디가 존재하지 않습니다.")
+                () -> new ApiRequestException("해당 아이디가 존재하지 않습니다.")
         );
         review.updateReview(reviewDto);
         return review.getId();

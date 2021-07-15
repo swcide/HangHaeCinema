@@ -1,6 +1,7 @@
 package com.hanghae.cinema.service;
 
 import com.hanghae.cinema.dto.request.CrawlingDto;
+import com.hanghae.cinema.exception.ApiRequestException;
 import com.hanghae.cinema.model.Movie;
 import com.hanghae.cinema.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class MovieService {
     }
 
     public Movie getMovieDetail(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("에러입니다 ㅎㅎ"));
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ApiRequestException("에러입니다 ㅎㅎ"));
 
         return movie;
     }
