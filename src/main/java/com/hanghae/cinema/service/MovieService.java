@@ -1,8 +1,6 @@
 package com.hanghae.cinema.service;
 
-import com.hanghae.cinema.dto.CrawlingDto;
-
-import com.hanghae.cinema.dto.MovieDto;
+import com.hanghae.cinema.dto.request.CrawlingDto;
 import com.hanghae.cinema.model.Movie;
 import com.hanghae.cinema.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,27 +19,32 @@ public class MovieService {
     // 크롤링 저장.
     public List<CrawlingDto> saveMovies(List<CrawlingDto> crawlingList) {
 
-        System.out.println("???여기에요?");
+
         List<Movie> movies = crawlingList.
                 stream().
                 map(crawling -> new Movie(
                     crawling.getTitle(),
                     crawling.getStar(),
                     crawling.getMovie_Code(),
-                    crawling.getImg()
+                    crawling.getImg(),
+                    crawling.getPlot(),
+                    crawling.getGenre(),
+                    crawling.getYear(),
+                    crawling.getRuntime(),
+                    crawling.getActor()
                 )).collect(Collectors.toList());
         movieRepository.saveAll(movies);
         return crawlingList;
     }
     // 영화 목록 페이징.
-    public Page<Movie> getMovie(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Movie> getMovie(int page,int size) {
+        Pageable pageable = PageRequest.of(page ,size);
         return movieRepository.findAll(pageable);
     }
 
     public Movie getMovieDetail(Long id) {
-        Movie b = movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("에러입니다 ㅎㅎ"));
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("에러입니다 ㅎㅎ"));
 
-        return b;
+        return movie;
     }
 }

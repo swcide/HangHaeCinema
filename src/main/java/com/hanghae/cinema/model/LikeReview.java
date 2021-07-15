@@ -1,12 +1,9 @@
 package com.hanghae.cinema.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hanghae.cinema.dto.LikeDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.http.ResponseEntity;
 
 import javax.persistence.*;
 
@@ -21,7 +18,8 @@ public class LikeReview {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(targetEntity = Movie.class,fetch =FetchType.LAZY)
+    @JoinColumn(name="movie_id")
     private Review review;
 
     @Column(nullable = false)

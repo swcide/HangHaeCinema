@@ -1,6 +1,6 @@
 package com.hanghae.cinema.service;
 
-import com.hanghae.cinema.dto.LikeResponseDto;
+import com.hanghae.cinema.dto.request.LikeRequestDto;
 import com.hanghae.cinema.model.LikeReview;
 import com.hanghae.cinema.model.Review;
 import com.hanghae.cinema.repository.LikeRepository;
@@ -14,18 +14,19 @@ public class LikeService {
     final LikeRepository likeRepository;
     final ReviewRepository reviewRepository;
 
-    public void clickLike(LikeResponseDto likeResponseDto) {
+    public void clickLike(LikeRequestDto likeResponseDto) {
 
-        Review review = reviewRepository.findReviewById(likeResponseDto.getReview());
-        System.out.println(review);
-        LikeReview likeReviewew =new LikeReview(review,likeResponseDto.getUser());
+        Review review = reviewRepository.findReviewById(likeResponseDto.getReviewId());
+        LikeReview likeReviewew =new LikeReview(review,likeResponseDto.getUserName());
+
         likeRepository.save(likeReviewew);
     }
 
-    public void deleteLike(LikeResponseDto likeResponseDto) {
-        LikeReview likeReview =likeRepository.findLikeReviewByReviewIdAndUser(likeResponseDto.getReview(),likeResponseDto.getUser());
+    public void deleteLike(LikeRequestDto likeResponseDto) {
+        LikeReview likeReview =likeRepository
+                .findLikeReviewByReviewIdAndUser(likeResponseDto.getReviewId(),
+                        likeResponseDto.getUserName());
         likeRepository.delete(likeReview);
-
     }
 
 

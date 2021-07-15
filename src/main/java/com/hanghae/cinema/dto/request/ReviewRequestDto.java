@@ -1,4 +1,4 @@
-package com.hanghae.cinema.dto;
+package com.hanghae.cinema.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ReviewDto {
+public class ReviewRequestDto {
+
+    private String username;
 
     private String moviecode;
 

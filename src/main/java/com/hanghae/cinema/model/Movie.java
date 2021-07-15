@@ -27,34 +27,31 @@ public class Movie extends Timestamped{
     @Column(nullable = false)
     private String img;
 
-    public Movie( String title, String star, String movie_code, String img) {
+    @Column(columnDefinition = "LONGTEXT")
+    private String plot;
+
+    @Column(nullable = false)
+    private String genre;
+
+    @Column(nullable = false)
+    private String year;
+
+    @Column(nullable = false)
+    private String runtime;
+
+    @Column(nullable = false)
+    private String actor;
+
+    public Movie(String title, String star, String movie_code, String img, String plot, String genre, String year, String runtime, String actor) {
         this.title=title;
         this.star=star;
         this.moviecode = movie_code;
         this.img =img;
+        this.plot = plot;
+        this.genre = genre;
+        this.year = year;
+        this.runtime = runtime;
+        this.actor = actor;
     }
 
-
-//    @Column(nullable = false)
-//    private String genre;
-//
-//    @Column(nullable = false)
-//    private String actor;
-//
-//    @Column(nullable = false)
-//    private String runtime;
-//
-//    @Column(nullable = false)
-//    private String rating;
-//
-//    @Column(nullable = false)
-//    private String director;
-//
-//    @Column(nullable = false)
-//    private String year;
-//
-
-//
-//    @Column(nullable = false)
-//    private String plot;
 }

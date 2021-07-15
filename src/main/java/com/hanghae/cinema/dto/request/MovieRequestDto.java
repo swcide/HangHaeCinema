@@ -1,4 +1,4 @@
-package com.hanghae.cinema.dto;
+package com.hanghae.cinema.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.hanghae.cinema.controller;
 
-import com.hanghae.cinema.dto.LikeResponseDto;
+import com.hanghae.cinema.dto.request.LikeRequestDto;
 import com.hanghae.cinema.model.LikeReview;
 import com.hanghae.cinema.repository.LikeRepository;
 import com.hanghae.cinema.service.LikeService;
@@ -18,25 +18,24 @@ public class LikeController {
 
     @GetMapping("/api/like")
         public List<LikeReview> getMoives()  {
-        System.out.println("호출 몇번됩니까?");
         List<LikeReview> lr =  likeRepository.findAll();
-
         return lr;
     }
 
     @PostMapping("/api/like")
-    public String clickLike(@RequestBody LikeResponseDto likeResponseDto){
-        likeResponseDto.setUser("zz");
+    public String clickLike(@RequestBody LikeRequestDto likeResponseDto){
 
-        System.out.println(likeResponseDto.getReview());
-        System.out.println(likeResponseDto.getUser());
+        System.out.println(likeResponseDto.getUserName());
+        System.out.println(likeResponseDto.getReviewId());
+        System.out.println(likeResponseDto.getReviewId().getClass());
+
         likeService.clickLike(likeResponseDto);
+
         return "like";
     }
 
     @DeleteMapping("/api/like")
-    public String deleteLike(@RequestBody LikeResponseDto likeResponseDto){
-
+    public String deleteLike(@RequestBody LikeRequestDto likeResponseDto){
         likeService.deleteLike(likeResponseDto);
         return "delete";
     }
