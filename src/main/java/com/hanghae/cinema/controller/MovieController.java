@@ -29,7 +29,6 @@ public class MovieController {
     @GetMapping("/api/movie")
     public Page<Movie> getMoives(@RequestParam("size") int size,
                                  @RequestParam("page") int page){
-
         return movieService.getMovie(page,size);
     }
 

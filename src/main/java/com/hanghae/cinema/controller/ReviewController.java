@@ -5,6 +5,7 @@ import com.hanghae.cinema.model.Review;
 import com.hanghae.cinema.repository.ReviewRepository;
 import com.hanghae.cinema.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class ReviewController {
     final ReviewService reviewService;
     @PostMapping("/api/review")
     public Review writeReview(@RequestBody ReviewRequestDto reviewDto) {
+
         Review review = new Review(reviewDto);
         reviewRepository.save(review);
         return review;
@@ -35,10 +37,9 @@ public class ReviewController {
         return reviewService.updateReview(reviewDto, id);
     }
     // 리뷰 삭제
-    @DeleteMapping("/api/review/delete/{id}")
-    public Long deleteReview(@PathVariable Long id, @RequestParam("password")String password) {
+    @PostMapping("/api/review/delete/{id}")
+    public ResponseEntity<Void> deleteReview(@PathVariable Long id,@RequestBody ReviewRequestDto reviewDto) {
 
-        return reviewService.deleteReview(id,password);
-    // 리뷰 등록
+        return reviewService.deleteReview(id,reviewDto);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface ReviewRepository extends JpaRepository<Review,Long> {
-    List<Review> findByMoviveid(Long id);
+    List<Review> findByMidOrderByCreatedAtDesc(Long id);
 
 
 }

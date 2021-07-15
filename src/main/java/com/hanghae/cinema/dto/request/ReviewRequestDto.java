@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ReviewRequestDto {
 
-    private Long moviveid;
+    private Long mid;
     private String username;
     private String contents;
     private String password;

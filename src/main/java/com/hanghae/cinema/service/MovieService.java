@@ -19,8 +19,6 @@ public class MovieService {
     final MovieRepository movieRepository;
     // 크롤링 저장.
     public List<CrawlingDto> saveMovies(List<CrawlingDto> crawlingList) {
-
-
         List<Movie> movies = crawlingList.
                 stream().
                 map(crawling -> new Movie(
@@ -47,8 +45,6 @@ public class MovieService {
     public Movie getMovieDetail(Long id) {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new ApiRequestException("영화정보가 존재하지 않습니다."));
-
-
 
         return movie;
     }

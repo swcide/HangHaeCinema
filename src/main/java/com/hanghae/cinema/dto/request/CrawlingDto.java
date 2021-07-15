@@ -32,8 +32,5 @@ public class CrawlingDto {
         this.year = year;
         this.runtime = runtime;
         this.actor = actor;
-
-
     }
-    
 }

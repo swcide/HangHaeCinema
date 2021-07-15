@@ -19,8 +19,7 @@ public class Review extends Timestamped {
     private Long id;
 
     @Column(nullable =false)
-    private Long moviveid;
-
+    private Long mid;
 
     @Column(nullable = false)
     private String username;
@@ -43,7 +42,7 @@ public class Review extends Timestamped {
         }
 
         this.username = reviewDto.getUsername();
-        this.moviveid = reviewDto.getMoviveid();
+        this.mid = reviewDto.getMid();
         this.contents = reviewDto.getContents();
         this.password = reviewDto.getPassword();
 
